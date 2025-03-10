@@ -7,6 +7,27 @@ En esta actividad he creado un docker-compose.yml, este archivo usa las imagenes
 - mariadb
 - phpmyadmin
 
+Además hago uso de un dockerfile para la instalacion de php
+
+## Dockerfile
+El dockerfile está configurado de la siguiente manera:  
+```
+FROM php:8.2-fpm
+
+RUN apt update && \
+    apt install -y zip libzip-dev libpng-dev libicu-dev libxml2-dev
+
+RUN docker-php-ext-install mysqli pdo pdo_mysql gd zip intl xml
+
+RUN apt clean
+```
+Descargo la imagen php:8.2-fpm y con la instruccion run ejecuto comandos de bash, las instrucciones son:
+- apt update: actualiza los paquetes
+- apt install -y zip libzip-dev libpng-dev libicu-dev libxml2-dev: instala los paquetes, instala zip y las bibliotecas de desarrollo libzip y libpng, instala las herramientas ICU e instala libxml2
+- Además instala las extensiones de xml, msqli, pdo, zip, intl, gd
+- apt clean limpia la caché local de los paquetes descargados
+  
+
 ## Node
 La configuración de node en el docker compose es el siguiente
 ```
