@@ -99,7 +99,7 @@ La configuración de phpmyadmin es:
     ports:
       - 8080:80
     environment:
-      PMA_HOST: mariadb
+      PMA_HOST: mariadbhe 
     depends_on:
       - mariadb
 ```
@@ -108,3 +108,46 @@ La configuración de phpmyadmin es:
 - ports: los puertos de comunicacion entre el contenedor y el host es el 8080:80
 - environment: el host que usa php es el host de mariadb
 - depends_on: depende del funcionamiento de mariadb
+- 
+Dentro del proyecto he tenido que hacer lo siguiente:
+
+He hecho un docker-compose up -d, una vez arrancado el contenedor le he hecho click en el boton de la esquina inferior izquierda de color azul > attach to a runnuing container > he seleccionado la opciopn php-1, donde se abrirá una nueva ventana de visual studio, donde he abierto una nueva terminal y he descargado composer.ç
+Para descargar composer he hecho uso de los comandos proporcionados por la web oficial:  
+
+```
+php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+php -r "if (hash_file('sha384', 'composer-setup.php') === 'dac665fdc30fdd8ec78b38b9800061b4150413ff2e3b6f88543c636f7cd84f6db9189d43a81e5503cda447da73c7e5b6') { echo 'Installer verified'.PHP_EOL; } else { echo 'Installer corrupt'.PHP_EOL; unlink('composer-setup.php'); exit(1); }"
+php composer-setup.php
+php -r "unlink('composer-setup.php');"
+sudo mv composer.phar /usr/local/bin/composer
+```
+Por ultimo he creado un proyecto laravel con el comando 
+
+```
+composer create-project laravel/laravel nombro del proyecto
+```
+
+De esta forma se generaá automaticamente todos los archivos que nuestro proyecto necesita.
+Tambien he configurado el archivo env para el uso de la base de datos que usará mi proyecto:  
+
+```
+DB_CONNECTION=mysql
+DB_HOST=mariadb
+DB_PORT=3306
+DB_DATABASE=laravel
+DB_USERNAME=root
+DB_PASSWORD=password123
+```
+Una vez hecho esto he hecho una migración para crear la base de datos de mi proyecto en phpmyadmin con:  
+
+```
+php artisan migrate
+```
+
+Para ejecutar la aplicación he usado el comando
+
+```
+php artisan serve --host=0.0.0.0 --port=8000
+```
+
+De esta manera si busco http://localhost:8000/ me llevará a la ruta "/" que en mi proyecto nos lleva a una lista de gatos
