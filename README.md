@@ -26,7 +26,10 @@ Descargo la imagen php:8.2-fpm y con la instruccion run ejecuto comandos de bash
 - apt install -y zip libzip-dev libpng-dev libicu-dev libxml2-dev: instala los paquetes, instala zip y las bibliotecas de desarrollo libzip y libpng, instala las herramientas ICU e instala libxml2
 - Además instala las extensiones de xml, msqli, pdo, zip, intl, gd
 - apt clean limpia la caché local de los paquetes descargados
-  
+
+
+![imagen](./img/1.png)
+
 
 ## Node
 La configuración de node en el docker compose es el siguiente
@@ -108,10 +111,14 @@ La configuración de phpmyadmin es:
 - ports: los puertos de comunicacion entre el contenedor y el host es el 8080:80
 - environment: el host que usa php es el host de mariadb
 - depends_on: depende del funcionamiento de mariadb
-- 
+  
 Dentro del proyecto he tenido que hacer lo siguiente:
 
-He hecho un docker-compose up -d, una vez arrancado el contenedor le he hecho click en el boton de la esquina inferior izquierda de color azul > attach to a runnuing container > he seleccionado la opciopn php-1, donde se abrirá una nueva ventana de visual studio, donde he abierto una nueva terminal y he descargado composer.ç
+He hecho un docker-compose up -d, una vez arrancado el contenedor le he hecho click en el boton de la esquina inferior izquierda de color azul > attach to a runnuing container > he seleccionado la opciopn php-1, donde se abrirá una nueva ventana de visual studio, donde he abierto una nueva terminal y he descargado composer.
+
+![imagen](./img/2.png)
+![imagen](./img/1a.png)
+
 Para descargar composer he hecho uso de los comandos proporcionados por la web oficial:  
 
 ```
@@ -138,6 +145,9 @@ DB_DATABASE=laravel
 DB_USERNAME=root
 DB_PASSWORD=password123
 ```
+
+![imagen](./img/3.png)
+
 Una vez hecho esto he hecho una migración para crear la base de datos de mi proyecto en phpmyadmin con:  
 
 ```
@@ -151,3 +161,8 @@ php artisan serve --host=0.0.0.0 --port=8000
 ```
 
 De esta manera si busco http://localhost:8000/ me llevará a la ruta "/" que en mi proyecto nos lleva a una lista de gatos
+
+
+![imagen](./img/4.png)
+![imagen](./img/5.png)
+![imagen](./img/6.png)
